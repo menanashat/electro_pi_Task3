@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Python AST (Abstract Syntax Trees) module for code analysis
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "write_Your_API"
 
 # Function to generate text using the gpt-3.5-turbo engine
 def generate_text(task_description, code_input, keywords_input):
