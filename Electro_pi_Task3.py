@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Python AST (Abstract Syntax Trees) module for code analysis
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Function to generate text using the gpt-3.5-turbo engine
 def generate_text(task_description, code_input, keywords_input):
@@ -95,10 +95,10 @@ def main():
 
         # Display similarity score
         st.subheader("Similarity Score:")
-        st.write(result['similarity_score'])
+        st.write(str(result['similarity_score'])+"%")
 
         # Check if the code meets the task requirements
-        if result['similarity_score'] > "50%":
+        if float(result['similarity_score']) > 50:
             # Check if the code contains main concepts
             contains_main_concepts, missing_concepts = check_main_concepts(result['improved_code'])
 
@@ -163,10 +163,13 @@ def calculate_similarity_score(code, task_description):
     similarity_matrix = cosine_similarity(vectors)
     similarity_score = similarity_matrix[0, 1]
 
-    # Convert the similarity score to a percentage and format it
-    similarity_percentage = "{:.2%}".format(similarity_score * 10)
+    # Round the similarity score to two decimal places
+    similarity_percentage = round(similarity_score * 100, 2)
 
-    return similarity_percentage
+    # Convert to string and extract the first two characters
+    similarity_percentage_str = str(similarity_percentage)[:2]
+
+    return similarity_percentage_str
 
 
 # Function to extract suggestions from ChatGPT response
